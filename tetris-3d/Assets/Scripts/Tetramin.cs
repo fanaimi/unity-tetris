@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tetramin : MonoBehaviour
 {
     [SerializeField] private int m_fallTime = 1;
-    private Vector3 m_spawnOffset = new Vector3(5, 18, 0);
+    [SerializeField] private Vector3 m_spawnOffset;
     
     private float m_countTime = 0f;
     private bool m_accelerating = false;

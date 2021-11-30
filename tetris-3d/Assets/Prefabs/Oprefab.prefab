@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fallTime: 1
+  m_spawnOffset: {x: 5, y: 19, z: 0}
 --- !u!54 &4834275790163161303
 Rigidbody:
   m_ObjectHideFlags: 0
