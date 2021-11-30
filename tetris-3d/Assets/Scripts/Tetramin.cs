@@ -17,6 +17,7 @@ public class Tetramin : MonoBehaviour
     private Bounds m_bounds;
 
     private static Transform[,] m_grid = new Transform[m_width, m_height];
+
     
     // Start is called before the first frame update
     void Start()
@@ -58,16 +59,34 @@ public class Tetramin : MonoBehaviour
             
             transform.Rotate(Vector3.forward, 90);
         }
+        
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
 
-
+            DropPiece();
+        }
     } // ListenKeyboard
+
+
+    private void DropPiece()
+    {
+        while (IsAvalidMove())
+        {
+            transform.Translate(Vector3.down, Space.World);
+        }
+        transform.Translate(Vector3.up, Space.World);
+        FindObjectOfType<AudioManager>().Play("drop");
+    } // DropPiece
+
+
 
     private void MoveDownControl()
     {
         m_accelerating = Input.GetKeyDown(KeyCode.DownArrow);
         m_countTime += Time.deltaTime ;
 
-        if (m_countTime >= (m_accelerating ? m_fallTime / 30 : m_fallTime) )
+        if (m_countTime >= (m_accelerating ? m_fallTime / 300 : m_fallTime) )
         {
             transform.Translate(Vector3.down, Space.World);
 
@@ -98,8 +117,8 @@ public class Tetramin : MonoBehaviour
             if (
                 m_roundedX < 0 || 
                 m_roundedX >= m_width ||
-                m_roundedY < 0 ||
-                m_roundedY > m_height
+                m_roundedY < 0 /*||
+                m_roundedY > m_height*/
             )
             {
                 return false;
@@ -157,6 +176,7 @@ public class Tetramin : MonoBehaviour
                 }
             }
         }
+        FindObjectOfType<AudioManager>().Play("line");
     } // MoveRowDown
     
     private void DeleteLine(int row)
@@ -166,6 +186,7 @@ public class Tetramin : MonoBehaviour
             Destroy(m_grid[m_column, row].gameObject);
             m_grid[m_column, row] = null;
         }
+        
     } // DeleteLine
     
     private bool IsLineFull(int row)
