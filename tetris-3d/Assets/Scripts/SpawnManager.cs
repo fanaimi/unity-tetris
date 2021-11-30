@@ -15,8 +15,8 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_firstPiece = SelectRandomPiece();
-        SpawnPiece();
+       // m_firstPiece = SelectRandomPiece();
+       SpawnRandomPiece();
     }
 
     // Update is called once per frame
@@ -35,8 +35,19 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnRandomPiece()
     {
-        /*int m_randomIndex = Random.Range(0, m_allTetramins.Length);
-        GameObject m_tetramin = m_allTetramins[m_randomIndex];*/
+        int m_randomIndex = Random.Range(0, m_allTetramins.Length);
+        GameObject m_tetramin = m_allTetramins[m_randomIndex];
+        
+       
+
+        Instantiate(m_tetramin, transform.position, transform.rotation);
+    } // SpawnRandomPiece
+    
+    
+    /*public void SpawnRandomPiece()
+    {
+        int m_randomIndex = Random.Range(0, m_allTetramins.Length);
+        GameObject m_tetramin = m_allTetramins[m_randomIndex];
         
         // Transform c = m_tetramin.transform.GetChild(0);
         if (m_nextPiece != null)
@@ -49,7 +60,7 @@ public class SpawnManager : MonoBehaviour
         PreviewNextPiece();
 
         Instantiate(m_tetramin, transform.position, transform.rotation);
-    } // SpawnRandomPiece
+    } // SpawnRandomPiece*/
 
     private void PreviewNextPiece()
     {
