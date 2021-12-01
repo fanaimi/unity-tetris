@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     private GameObject m_nextPiece;
     private GameObject m_nextPiecePreview;
     
-    private Vector3 m_previewPosition = new Vector3(9.5f, 22.5f, 0.2f);
+    private Vector3 m_previewPosition; 
     
     // Start is called before the first frame update
     void Start()
@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnPiece()
     {
-        Instantiate(m_allTetramins[m_nextPieceIndex], transform.position, transform.rotation);
+        Instantiate(m_nextPiece, transform.position, transform.rotation);
         GetNextPiece();
     } //  SpawnPiece
     
@@ -51,6 +51,22 @@ public class SpawnManager : MonoBehaviour
 
     private void PreviewNextPiece()
     {
+        /*if (m_nextPieceIndex == 0 || m_nextPieceIndex == 3)
+        {
+            m_previewPosition.x = 9.5f;
+            m_previewPosition.y = 22.5f;
+        }
+        else
+        {
+            m_previewPosition.x = 9.5f;
+            m_previewPosition.y = 22.25f;
+        }*/
+
+        m_previewPosition =
+            (m_nextPieceIndex == 0 || m_nextPieceIndex == 3)
+                ? new Vector3(9.5f, 22.5f, 0.2f)
+                : new Vector3(9.5f, 22.25f, 0.2f);
+
         m_nextPiecePreview = Instantiate(m_allStaticTetramins[m_nextPieceIndex], m_previewPosition, transform.rotation);
     } // m_nextPiece
 
