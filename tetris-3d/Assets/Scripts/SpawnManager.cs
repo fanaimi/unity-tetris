@@ -15,8 +15,8 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // m_firstPiece = SelectRandomPiece();
-       SpawnRandomPiece();
+        GetNextPiece();
+        SpawnPiece();
     }
 
     // Update is called once per frame
@@ -25,42 +25,25 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    public GameObject SelectRandomPiece()
+    private void GetNextPiece()
     {
-        int m_randomIndex = Random.Range(0, m_allTetramins.Length);
-        GameObject m_random = m_allTetramins[m_randomIndex];
-        return m_random;
-    } // SelectRandomPiece
-
-
-    public void SpawnRandomPiece()
-    {
-        int m_randomIndex = Random.Range(0, m_allTetramins.Length);
-        GameObject m_tetramin = m_allTetramins[m_randomIndex];
-        
-       
-
-        Instantiate(m_tetramin, transform.position, transform.rotation);
-    } // SpawnRandomPiece
-    
-    
-    /*public void SpawnRandomPiece()
-    {
-        int m_randomIndex = Random.Range(0, m_allTetramins.Length);
-        GameObject m_tetramin = m_allTetramins[m_randomIndex];
-        
-        // Transform c = m_tetramin.transform.GetChild(0);
         if (m_nextPiece != null)
         {
             Destroy(m_nextPiece);
             m_nextPiece = null;
         }
 
-        m_nextPiece = SelectRandomPiece();
+        int m_randomIndex = Random.Range(0, m_allTetramins.Length);
+        m_nextPiece= m_allTetramins[m_randomIndex];
         PreviewNextPiece();
+    } // GetNextPiece
 
-        Instantiate(m_tetramin, transform.position, transform.rotation);
-    } // SpawnRandomPiece*/
+    public void SpawnPiece()
+    {
+        Instantiate(m_nextPiece, transform.position, transform.rotation);
+    } //  SpawnPiece
+    
+    
 
     private void PreviewNextPiece()
     {

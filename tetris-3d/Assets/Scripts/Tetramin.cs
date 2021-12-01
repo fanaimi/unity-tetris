@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,16 @@ public class Tetramin : MonoBehaviour
 
     private static Transform[,] m_grid = new Transform[m_width, m_height];
 
+    private SpawnManager spawnManager;
+    private AudioManager audioManager;
     
+
+    private void Awake()
+    {
+        spawnManager = FindObjectOfType<SpawnManager>();
+        audioManager = FindObjectOfType<AudioManager>();
+    } // awake
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +86,7 @@ public class Tetramin : MonoBehaviour
             transform.Translate(Vector3.down, Space.World);
         }
         transform.Translate(Vector3.up, Space.World);
-        FindObjectOfType<AudioManager>().Play("drop");
+        audioManager.Play("drop");
     } // DropPiece
 
 
@@ -97,7 +107,7 @@ public class Tetramin : MonoBehaviour
                 ProcessLines();
                 this.enabled = false;
 
-                FindObjectOfType<SpawnManager>().SpawnRandomPiece();
+                spawnManager.SpawnPiece();
             }
             
             
@@ -176,7 +186,7 @@ public class Tetramin : MonoBehaviour
                 }
             }
         }
-        FindObjectOfType<AudioManager>().Play("line");
+        audioManager.Play("line");
     } // MoveRowDown
     
     private void DeleteLine(int row)
