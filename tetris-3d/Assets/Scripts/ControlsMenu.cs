@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-public class MainMenu : MonoBehaviour
+public class ControlsMenu : MonoBehaviour
 {
-    
+        
     private AudioManager audioManager;
 
     private void Awake()
@@ -15,33 +14,19 @@ public class MainMenu : MonoBehaviour
         
         audioManager = FindObjectOfType<AudioManager>();
     }
-
-    
     private void Start()
     {
         audioManager.Play("menu");
     }
 
-    public void PlayGame()
+    public void BackToMenu()
     {
-        SceneManager.LoadScene(2);
-    }
-    
-    
-    public void LoadControlsMenu()
-    {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
-    public void QuitGame()
-    {
-        print("quit");
-        Application.Quit();
-        
-    }
 
     public void PlayHoverSound()
     {
-        audioManager.Play("UiBuzzer");
+        // FindObjectOfType<AudioManager>().Play("UiBuzzer");
     }
 }

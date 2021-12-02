@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         print("yeah");
+        audioManager.Stop("menu");
         audioManager.Play("game");
     }
 
