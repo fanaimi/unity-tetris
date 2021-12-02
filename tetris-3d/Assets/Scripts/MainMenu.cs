@@ -1,18 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    private AudioManager audioManager;
+
+    private void Awake()
     {
+        
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+
+    
+    private void Start()
+    {
+        audioManager.Play("menu");
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+    
+    
+    public void LoadControlsMenu()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void QuitGame()
+    {
+        print("quit");
+        Application.Quit();
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayHoverSound()
     {
-        
+        audioManager.Play("UiBuzzer");
     }
 }
