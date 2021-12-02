@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Tetramin : MonoBehaviour
 {
-    [SerializeField] private int m_fallTime = 1;
+    /*private float m_fallTime = 1;
+    private float inclreaseLevelTimer = 10;*/
     [SerializeField] private Vector3 m_spawnOffset;
     
     private float m_countTime = 0f;
@@ -21,12 +22,14 @@ public class Tetramin : MonoBehaviour
 
     private SpawnManager spawnManager;
     private AudioManager audioManager;
+    private GameManager gameManager;
     
 
     private void Awake()
     {
         spawnManager = FindObjectOfType<SpawnManager>();
         audioManager = FindObjectOfType<AudioManager>();
+        gameManager = FindObjectOfType<GameManager>();
     } // awake
 
     // Start is called before the first frame update
@@ -38,6 +41,7 @@ public class Tetramin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         ListenKeyboard();
         
         MoveDownControl();
@@ -96,7 +100,7 @@ public class Tetramin : MonoBehaviour
         m_accelerating = Input.GetKeyDown(KeyCode.DownArrow);
         m_countTime += Time.deltaTime ;
 
-        if (m_countTime >= (m_accelerating ? m_fallTime / 300 : m_fallTime) )
+        if (m_countTime >= (m_accelerating ? gameManager.m_fallTime / 10 : gameManager.m_fallTime) )
         {
             transform.Translate(Vector3.down, Space.World);
 
